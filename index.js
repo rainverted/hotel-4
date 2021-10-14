@@ -1,9 +1,9 @@
 class Hotel {
     constructor(name, address, stars) {
+        this.rooms = [];
         this.name = name;
         this.address = address;
         this.stars = stars;
-        this.rooms = [];
     }
     addRoom(room) {
         this.rooms.push(room);
@@ -13,11 +13,17 @@ class Hotel {
             room.printData();
         }
     }
-    printData() {
+    printData(onlyComfort) {
         console.log(`Hotel:`);
         console.log(`name: ${this.name}`);
         console.log(`address: ${this.address}`);
         console.log(`star number: ${this.stars}`);
+        if (onlyComfort) {
+            this.printRooms(15);
+        }
+        else {
+            this.printRooms();
+        }
     }
 }
 class Room {
@@ -54,10 +60,10 @@ class Spa extends Room {
     }
 }
 const hotel = new Hotel("Moss", "Southside str. 5", 5);
-hotel.printData();
 const room1 = new Room(30, 2);
 hotel.addRoom(room1);
 const room2 = new Room(100, 4);
 hotel.addRoom(room2);
 const room3 = new Spa(120, 2, 15, 30);
 hotel.addRoom(room3);
+hotel.printData(true);

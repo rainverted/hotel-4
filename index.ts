@@ -1,36 +1,39 @@
 class Hotel {
     //atributes
-    public readonly name: string;
+ public readonly name: string;
     public readonly address: string;
     public readonly stars: number;
-    public readonly rooms: Room [];         //NESUPRANTU
+    public readonly rooms: Room[] = [];
 
-    public constructor(name: string,
-                        address: string,
-                        stars: number) {
-
+    public constructor(name: string, address: string, stars: number) {
         this.name = name;
         this.address = address;
         this.stars = stars;
-        this.rooms = [];                //NESUPRANTU
     }
 
     //add new rooms to array  
     public addRoom(room: Room) {
-        this.rooms.push(room);        //NESUPRANTU
+        this.rooms.push(room);     
     }
 
-    private printRooms(minComfort ? : number): void {
+    private printRooms(minComfort ? : number) {
         for (const room of this.rooms) {
             room.printData();
         }
     }
 
-    public printData(): void {
+    public printData(onlyComfort?: boolean): void {
          console.log(`Hotel:`);
          console.log(`name: ${this.name}`);
          console.log(`address: ${this.address}`);
          console.log(`star number: ${this.stars}`);
+
+        //OnlyComfort parametras nėra būtinas, bet jei jis nurodomas spausdinamos patalpos, kurių komforto santykis yra didesnis už 15.
+        if (onlyComfort) {
+            this.printRooms(15)
+        } else {
+            this.printRooms()
+        }
         }
 }
 
@@ -81,7 +84,6 @@ class Spa extends Room {
 }
 
 const hotel = new Hotel("Moss", "Southside str. 5", 5);
-hotel.printData();
 
 const room1: Room = new Room(30, 2);
 hotel.addRoom(room1);
@@ -92,4 +94,4 @@ hotel.addRoom(room2);
 const room3: Spa = new Spa(120, 2, 15, 30);
 hotel.addRoom(room3);
 
-// hotel.printData(true);
+hotel.printData(true);
