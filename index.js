@@ -14,7 +14,7 @@ class Hotel {
         }
     }
     printData() {
-        console.log(`HOTEL:`);
+        console.log(`Hotel:`);
         console.log(`name: ${this.name}`);
         console.log(`address: ${this.address}`);
         console.log(`star number: ${this.stars}`);
@@ -25,29 +25,39 @@ class Room {
         this.size = size;
         this.capacity = capacity;
     }
-
-    //counting comfort level per person
     comfort() {
-        let sizePerPerson = Math.round(this.size / this.capacity);
+        let sizePerPerson = this.size / this.capacity;
         return sizePerPerson;
     }
     printData() {
         console.log(`==============`);
-        console.log(`ROOM:`);
-        console.log(`size: ${this.size} m2`);
+        console.log(`Room:`);
+        console.log(`size: ${this.size}`);
         console.log(`capacity: ${this.capacity}`);
-        console.log(`comfort level: ${this.comfort()}`);
+        console.log(`Comfort level: ${this.comfort()}`);
     }
 }
 class Spa extends Room {
+    constructor(size, capacity, poolSize, poolTemerature) {
+        super(size, capacity);
+        this.poolSize = poolSize;
+        this.poolTemperature = poolTemerature;
+    }
+    comfort() {
+        let comfortPerPerson = (this.size - this.poolSize) / this.capacity;
+        return comfortPerPerson;
+    }
+    printData() {
+        super.printData();
+        console.log(`Pool size: ${this.poolSize}`);
+        console.log(`Pool temperature: ${this.poolTemperature}`);
+    }
 }
 const hotel = new Hotel("Moss", "Southside str. 5", 5);
 hotel.printData();
-
-const room1 = new Room(25, 2);
+const room1 = new Room(30, 2);
 hotel.addRoom(room1);
-room1.printData();
-
 const room2 = new Room(100, 4);
 hotel.addRoom(room2);
-room2.printData();
+const room3 = new Spa(120, 2, 15, 30);
+hotel.addRoom(room3);

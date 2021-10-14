@@ -61,14 +61,23 @@ class Spa extends Room {
     public poolSize: number;
     public poolTemperature: number;
 
-    // public comfort(number): {
 
-    // }
+    constructor(size: number, capacity: number, poolSize: number, poolTemerature: number,) {
+        super(size, capacity);
+        this.poolSize = poolSize;
+        this.poolTemperature = poolTemerature;
+    }
 
-    // public printData(): void {
+    comfort(): number {
+        let comfortPerPerson = (this.size - this.poolSize) / this.capacity;
+        return comfortPerPerson;
+    }
 
-    // }
-
+    printData(): void {
+        super.printData();
+        console.log(`Pool size: ${this.poolSize}`);
+        console.log(`Pool temperature: ${this.poolTemperature}`);
+    }
 }
 
 const hotel = new Hotel("Moss", "Southside str. 5", 5);
@@ -76,3 +85,11 @@ hotel.printData();
 
 const room1: Room = new Room(30, 2);
 hotel.addRoom(room1);
+const room2: Room = new Room(100, 4);
+hotel.addRoom(room2);
+
+
+const room3: Spa = new Spa(120, 2, 15, 30);
+hotel.addRoom(room3);
+
+// hotel.printData(true);
